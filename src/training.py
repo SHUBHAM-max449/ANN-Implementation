@@ -7,9 +7,7 @@ def training(config_path):
     config = read_config(config_path)
     validation_datasize=config["params"]["validation_datasize"]
     (X_train,y_train),(X_valid,y_valid),(X_test,y_test)=get_data(validation_datasize)
-    print(X_train.shape)
-    print(X_valid.shape)
-    print(X_test.shape)
+   
 
 if __name__=='__main__':
     args = argparse.ArgumentParser()
