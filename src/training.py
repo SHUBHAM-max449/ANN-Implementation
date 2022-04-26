@@ -1,8 +1,10 @@
 import os
+import pandas as pd
 from utils.common import read_config
 from utils.data_managment import get_data
 from utils.model import create_model
 from utils.model import save_model
+from utils.model import save_plot
 import argparse
 
 def training(config_path):
@@ -24,6 +26,11 @@ def training(config_path):
     model_dir_path = os.path.join(artifacts_dir, model_dir)
     os.makedirs(model_dir_path,exist_ok=True)
     save_model(model, model_name, model_dir_path)
+    plot_name = config["artifacts"]["plot_name"]
+    plot_dir=config["artifacts"]["plot_dir"]
+    plot_dir_path=os.path.join(artifacts_dir,plot_dir)
+    save_plot(pd.DataFrame(Trained_model.history),plot_name,plot_dir_path,EPOCS)
+
 
    
 
