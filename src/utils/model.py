@@ -1,4 +1,6 @@
+import os
 import tensorflow as tf
+import time
 
 def create_model(loss_function,optimizer,metrics,no_classes):
     Layers=[
@@ -7,7 +9,18 @@ def create_model(loss_function,optimizer,metrics,no_classes):
         tf.keras.layers.Dense(100,activation="relu",name="hidddenlayer2"),
         tf.keras.layers.Dense(no_classes,activation="softmax",name="output_layer")
         ]
-    model=tf.keras.Sequential(Layers)
-    model.summary()
-    model.compile(loss=loss_function,optimizer=optimizer,metrics=metrics)
-    return model ## <<< untrained model
+    untrained_model=tf.keras.Sequential(Layers)
+    untrained_model.summary()
+    untrained_model.compile(loss=loss_function,optimizer=optimizer,metrics=metrics)
+    return untrained_model      ## <<< untrained model
+
+
+def get_unique_file_name(file_name):
+    unique_filename = time.strftime(f"%Y%m%d_%H%M%S_{file_name}")
+    return unique_filename
+
+
+def save_model(model,model_name,model_dir):
+    unique_filename = get_unique_file_name(model_name)
+    path_to_model = os.path.join(model_dir,unique_filename)
+    model.save(path_to_model)

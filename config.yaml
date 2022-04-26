@@ -10,13 +10,14 @@ params :
 
    
   
-Artifacts :
-  Artifact_dir: artifacts
+artifacts :
+  artifact_dir: artifacts
   models_dir: model
   plots_dir: plots
   model_check_points_dir: checkpoints
+  model_name: model.h5
 
-Logs:
+logs:
   log_dir: logs
   general_dir: genral_logs
   tensorboard_dir: tensorboard_logs
