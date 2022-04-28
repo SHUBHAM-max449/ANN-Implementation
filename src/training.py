@@ -5,6 +5,7 @@ from utils.data_managment import get_data
 from utils.model import create_model
 from utils.model import save_model
 from utils.model import save_plot
+from utils.model import callbacks_and_checkpoints,restart_training
 import argparse
 
 def training(config_path):
@@ -19,7 +20,7 @@ def training(config_path):
     # Default batch size is 32
     EPOCS = config["params"]["epochs"]
     VALIDATION = (X_valid,y_valid)
-    Trained_model = model.fit(X_train,y_train,epochs=EPOCS,validation_data=VALIDATION)
+    Trained_model = model.fit(X_train,y_train,epochs=EPOCS,validation_data=VALIDATION,callbacks=callbacks_and_checkpoints())
     model_name=config["artifacts"]["model_name"]
     model_dir = config["artifacts"]["models_dir"]
     artifacts_dir = config["artifacts"]["artifact_dir"]
@@ -30,6 +31,13 @@ def training(config_path):
     plot_dir=config["artifacts"]["plot_dir"]
     plot_dir_path=os.path.join(artifacts_dir,plot_dir)
     save_plot(pd.DataFrame(Trained_model.history),plot_name,plot_dir_path,EPOCS)
+    model=restart_training()
+    Trained_model = model.fit(X_train,y_train,epochs=EPOCS,validation_data=VALIDATION,callbacks=callbacks_and_checkpoints())
+    save_model(model, model_name, model_dir_path)
+    save_plot(pd.DataFrame(Trained_model.history),plot_name,plot_dir_path,EPOCS)
+
+
+
 
 
    
