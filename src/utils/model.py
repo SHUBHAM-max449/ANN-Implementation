@@ -38,17 +38,6 @@ def save_plot(data,plot_name,plot_dir,epochs):
     plt.savefig(plot_path)
     plt.show()
 
-def callbacks_and_checkpoints():
-    early_stopping_cb = tf.keras.callbacks.EarlyStopping(patience=5, restore_best_weights=True)
-    CKPT_path = "model.ckpt.h5"
-    checkpointing_cb = tf.keras.callbacks.ModelCheckpoint(CKPT_path, save_best_only=True)
-    CALLBACK_LIST = [early_stopping_cb, checkpointing_cb]
-    return CALLBACK_LIST
-
-def restart_training():
-    CKPT_path = "model.ckpt.h5"
-    ckpt_model = tf.keras.models.load_model(CKPT_path)
-    return ckpt_model
 
 
 
