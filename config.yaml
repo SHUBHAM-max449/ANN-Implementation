@@ -15,11 +15,10 @@ artifacts :
   models_dir: model
   plot_dir: plot
   plot_name: visualization
-  model_check_points_dir: checkpoints
+  CHECKPOINT_DIR: checkpoints
   model_name: model.h5
 
 logs:
-  log_dir: logs_dir
+  log_dir: logs
   general_dir: genral_logs
-  tensorboard_dir: tensorboard_logs
-
+  TENSORBOARD_ROOT_LOG_DIR: tensorboard_logs
