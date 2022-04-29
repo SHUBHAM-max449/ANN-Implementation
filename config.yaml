@@ -19,7 +19,7 @@ artifacts :
   model_name: model.h5
 
 logs:
-  log_dir: logs
+  log_dir: logs_dir
   general_dir: genral_logs
   tensorboard_dir: tensorboard_logs
 
